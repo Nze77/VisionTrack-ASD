@@ -1,78 +1,16 @@
 VisionTrack-ASD
-Overview
-VisionTrack-ASD is an AI-powered system for detecting and tracking children and therapists in videos. It assigns unique IDs, handles re-entries and occlusions, and overlays tracking data for behavioral analysis and engagement monitoring.
+Analyzing Model Predictions
+Detection
+The system utilizes a pre-trained object detection model, which scans each video frame to identify persons (children and therapists). The model outputs bounding boxes around detected individuals, accompanied by confidence scores indicating the reliability of each detection. These bounding boxes are the foundation for further analysis.
 
-Features
-Person Detection: Identifies and labels children and therapists in video frames.
-Unique ID Assignment: Provides and maintains unique IDs for each person.
-Tracking: Monitors movement across frames, managing re-entries and occlusions.
-Output Video: Generates a video with bounding boxes and IDs.
-Installation
-Prerequisites
-Ensure Python 3.11 or later is installed. Download it from python.org.
+Unique ID Assignment
+Each detected person is assigned a unique ID, ensuring consistent identification across frames. The assignment leverages a tracking algorithm that maintains these IDs as individuals move within the video. The tracking system analyzes movement patterns and appearance features to distinguish between different persons and ensure the IDs remain accurate.
 
-Setting Up a Virtual Environment
-Create a Virtual Environment:
+Tracking and Re-entries
+As individuals move, leave, or re-enter the frame, the tracking algorithm updates or reassigns their unique IDs. The system is designed to recognize the same individual upon re-entry and reassign the original ID if possible. This is crucial for maintaining continuous tracking throughout the video.
 
-bash
-Copy code
-python -m venv venv
-Activate the Virtual Environment:
+Handling Occlusions
+When a person is partially or fully obscured (occluded) by objects or other individuals, the tracking system employs advanced techniques to re-identify them once they become visible again. This process ensures that the correct ID is reassigned, minimizing errors in tracking and maintaining the continuity of the person’s movement trajectory.
 
-Windows:
-
-bash
-Copy code
-venv\Scripts\activate
-macOS/Linux:
-
-bash
-Copy code
-source venv/bin/activate
-Installing Dependencies
-Clone the Repository (if applicable):
-
-bash
-Copy code
-git clone <repository-url>
-cd <repository-directory>
-Install the Required Packages:
-
-bash
-Copy code
-pip install -r requirements.txt
-Requirements File
-Create a requirements.txt file with the following content:
-
-plaintext
-Copy code
-# Core Libraries
-numpy>=1.23.0,<2.0.0
-opencv-python
-torch
-torchvision
-ultralytics
-scipy
-matplotlib
-
-# Optional for video handling
-ffmpeg-python
-Usage
-Prepare Your Video: Ensure your test video is ready and update the path in the configuration file.
-
-Run the Inference Script:
-
-bash
-Copy code
-python main.py
-This processes the video, applies detection and tracking, and saves the annotated output.
-
-Review Output: Check the output video for bounding boxes and unique IDs.
-
-Configuration
-Input Video Path: Update in the script or configuration file.
-Detection Threshold: Adjust parameters as needed.
-Troubleshooting
-Import Errors: Ensure all dependencies are correctly installed.
-Installation Issues: Verify Python and package versions, and check the virtual environment setup.
-For further assistance, consult NumPy Troubleshooting.
+Output
+The final output is an annotated video where each person is enclosed in a bounding box, labeled with their unique ID. This visualization allows for easy interpretation of the tracking results, facilitating behavior analysis and engagement monitoring.
