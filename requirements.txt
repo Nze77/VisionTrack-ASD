@@ -1,0 +1,7 @@
+numpy>=1.23.0,<2.0.0
+opencv-python
+torch
+torchvision
+ultralytics
+scipy
+matplotlib
